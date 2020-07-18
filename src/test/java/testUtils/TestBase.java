@@ -10,11 +10,9 @@ public abstract class TestBase {
     @BeforeTest(alwaysRun = true)
     @Parameters({"browser","url"})
     public void setUp(String browser, String url) {
-       // System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         DriverSupport driverSupport = new DriverSupport();
         driver = driverSupport.initDriver(browser);
         driver.get(url);
-
     }
 
     @AfterTest(alwaysRun = true)

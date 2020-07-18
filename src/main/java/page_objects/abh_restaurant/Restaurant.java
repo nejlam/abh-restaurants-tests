@@ -9,7 +9,7 @@ import page_objects.PageBase;
 
 import java.net.BindException;
 import java.util.List;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 import org.openqa.selenium.WebElement;
 
 public class Restaurant extends PageBase {
@@ -66,15 +66,17 @@ public class Restaurant extends PageBase {
         }
 
     //dropdown
-    public void selectFromDropdown(String option){
+   public void selectFromDropdown(String option){
         findDropDownElement().selectByVisibleText(option);
     }
 
+/*
     public List<String> getSelectedOption(){
         List<WebElement> selectedElements =
                 findDropDownElement().getAllSelectedOptions();
         return selectedElements.stream().map(e->e.getText()).collect(Collectors.toList());
     }
+*/
 
     private Select findDropDownElement(){
         return new Select(getPeopleDropDown());

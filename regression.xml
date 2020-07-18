@@ -4,9 +4,10 @@
     <parameter name="url" value="https://abh-restaurants-dev-days.herokuapp.com/"/>
     <parameter name="browser" value="chrome"/>
 
-    <test name="Make Reservation">
+
+    <test name="Login Negative">
         <classes>
-            <class name="smoke.MakeReservation"/>
+            <class name="regression.LoginNegative"/>
         </classes>
     </test>
 

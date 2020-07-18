@@ -3,6 +3,7 @@ package page_objects.abh_restaurant;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 import page_objects.PageBase;
 
 public class LoginPage extends PageBase {
@@ -12,6 +13,8 @@ public class LoginPage extends PageBase {
     final static private String EMAIL_INPUT_FIELD_CSS = "div[class='row'] input[id='email']";
     final static private String PASSWORD_INPUT_FIELD_CSS = "div[class='row'] input[id='password']";
     final static private String LOGIN_BUTTON_CSS = "div[class='row'] div button[type='submit']";
+    final static private String ERROR_MESSAGE_CSS = ".error-message";
+
 
     public LoginPage(WebDriver driver) {
         super(driver, PAGE_URL_REGEX);
@@ -30,6 +33,9 @@ public class LoginPage extends PageBase {
     @FindBy(css = LOGIN_BUTTON_CSS)
     private WebElement loginButton;
 
+    @FindBy(css = ERROR_MESSAGE_CSS)
+    public WebElement errorMessage;
+
     public WebElement getCreateAccountButton(){
         return createAccountButton;
     }
@@ -45,6 +51,10 @@ public class LoginPage extends PageBase {
         return loginButton;
     }
 
+    public WebElement getErrorMessage(){
+        return errorMessage;
+    }
+
     public Registration clickRegisterButton(){
         getCreateAccountButton().click();
         return new Registration(getDriver());
@@ -57,5 +67,13 @@ public class LoginPage extends PageBase {
         return new HomePage(getDriver());
     }
 
+    public void clearInputs(){
+        getEmailInputField().clear();
+        getPasswordInputField().clear();
+    }
+
+    public boolean checkErrorMessage(){
+        return errorMessage.isDisplayed();
+    }
 
 }

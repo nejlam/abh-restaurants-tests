@@ -1,6 +1,7 @@
 package page_objects.abh_restaurant;
 
 
+import com.gargoylesoftware.htmlunit.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,7 @@ public class HomePage extends PageBase {
 
     final static private String NAV_BAR_LIST_CSS = "#bs-example-navbar-collapse-1 > ul > li >a";
     final static private String MAIN_TEXT_CSS = "#main > div > div > h1";
-    final static private String LOGGED_USER_TEXT_ID = "ember223";
+    final static private String LOGGED_USER_TEXT_XPATH = "/html/body/div[2]/div[1]/div[1]/div/nav/div[1]/div[2]/ul/li[3]/a";
     final static private String LOGIN_BUTTON_CSS = "ember38";
 
 
@@ -34,7 +35,7 @@ public class HomePage extends PageBase {
     @FindBy(css = MAIN_TEXT_CSS)
     private WebElement mainText;
 
-    @FindBy(id = LOGGED_USER_TEXT_ID)
+    @FindBy(xpath = LOGGED_USER_TEXT_XPATH)
     private WebElement loggedUser;
 
     @FindBy(css = LOGIN_BUTTON_CSS)
