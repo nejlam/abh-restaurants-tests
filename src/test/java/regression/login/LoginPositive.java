@@ -1,26 +1,26 @@
-package smoke;
+package regression.login;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import page_objects.abh_restaurant.*;
+import page_objects.abh_restaurant.HomePage;
+import page_objects.abh_restaurant.LoginPage;
+import page_objects.abh_restaurant.Registration;
+import page_objects.abh_restaurant.UserDetails;
 import testUtils.TestBase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MakeReservation extends TestBase {
+public class LoginPositive extends TestBase {
 
     private static final String FIRST_NAME = "Alice";
     private static final String LAST_NAME = "Lopez";
-    private static final String EMAIL = "alic5@live.com";
+    private static final String EMAIL = "alic8@live.com";
     private static final String PHONE_NUMBER = "12345";
     private static final String ADDRESS = "Pijacna 118";
     private static final String PASSWORD = "1234";
-    private static final String HEADER_TEXT = "Make a free reservation";
     private static final String USERNAME_TEXT = "Alice Lopez";
+
 
     SimpleDateFormat formatter = new SimpleDateFormat("MMddHHmm");
     Date date = new Date();
@@ -46,7 +46,7 @@ public class MakeReservation extends TestBase {
     @Test(priority = 3)
     public void checkUserIsRegistered(){
         Assert.assertTrue(new HomePage(driver)
-        .checkUsernameText(USERNAME_TEXT));
+                .checkUsernameText(USERNAME_TEXT));
     }
 
     @Test(priority = 4)
@@ -59,7 +59,7 @@ public class MakeReservation extends TestBase {
     public void logOut() {
         new UserDetails(driver)
                 .clickLogoutButton();
-        driver.get("https://abh-restaurants-dev-days.herokuapp.com/"); //hard-coded, fix this
+        driver.get("https://abh-restaurants-dev-days.herokuapp.com/");
     }
 
 
@@ -82,22 +82,9 @@ public class MakeReservation extends TestBase {
     }
 
     @Test(priority = 9)
-    public void openRestaurantsPage() {
-        new HomePage(driver)
-                .openRestaurantsPage(1);
+    public void checkNoErrorMessage(){
+        Assert.assertFalse(new LoginPage(driver)
+        .checkErrorMessage());
     }
-
-    @Test(priority = 10)
-    public void openRestaurantPage(){
-        new Restaurants(driver)
-                .reserveRestaurant();
-    }
-
-    @Test(priority = 11)
-    public void findTable(){
-        new Restaurant(driver)
-                .selectOptions("2 People", "12:12:2020", "1000PM");
-    }
-
 
 }

@@ -1,21 +1,20 @@
-package regression;
+package regression.registration;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page_objects.abh_restaurant.HomePage;
 import page_objects.abh_restaurant.LoginPage;
 import page_objects.abh_restaurant.Registration;
-import page_objects.abh_restaurant.UserDetails;
 import testUtils.TestBase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RegistrationNegative extends TestBase {
+public class RegistrationNegativePhoneNumber extends TestBase {
     private static final String FIRST_NAME = "Alice";
     private static final String LAST_NAME = "Lopez";
-    private static final String EMAIL = "alic5@live.com";
-    private static final String PHONE_NUMBER = "12345";
+    private static final String EMAIL = "alic7@live.com";
+    private static final String PHONE_NUMBER = "abcd";
     private static final String ADDRESS = "Pijacna 118";
     private static final String PASSWORD = "1234";
     private static final String USERNAME_TEXT = "Alice Lopez";
@@ -36,7 +35,7 @@ public class RegistrationNegative extends TestBase {
     }
 
     @Test(priority = 2)
-    public void populateRegistrationForm() {
+    public void registerWithIncorrectEmail() {
         new Registration(driver)
                 .makeRegistration(FIRST_NAME, LAST_NAME, formatter.format(date)+EMAIL, PHONE_NUMBER, ADDRESS, PASSWORD, PASSWORD);
     }
@@ -48,16 +47,9 @@ public class RegistrationNegative extends TestBase {
     }
 
     @Test(priority = 4)
-    public void openUserDetails() {
-        new HomePage(driver)
-                .clickUserDetails(2);
-    }
-
-    @Test(priority = 5)
-    public void logOut() {
-        new UserDetails(driver)
-                .clickLogoutButton();
-        driver.get("https://abh-restaurants-dev-days.herokuapp.com/");
+    public void checkErrorMessage(){
+        Assert.assertTrue(new Registration(driver)
+                .checkErrorMessage());
     }
 
 }

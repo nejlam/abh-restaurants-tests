@@ -1,4 +1,4 @@
-package regression;
+package regression.login;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,17 +11,15 @@ import testUtils.TestBase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class LoginNegative extends TestBase {
-
+public class LoginNegativePassword extends TestBase {
     private static final String FIRST_NAME = "Alice";
     private static final String LAST_NAME = "Lopez";
-    private static final String EMAIL = "alic6@live.com";
+    private static final String EMAIL = "alic9@live.com";
     private static final String PHONE_NUMBER = "12345";
     private static final String ADDRESS = "Pijacna 118";
     private static final String PASSWORD = "1234";
+    private static final String INCORRECT_PASSWORD = "123";
     private static final String USERNAME_TEXT = "Alice Lopez";
-    private static final String NONEXISTENT_EMAIL = "void@live.com";
-    private static final String INCORRECT_PASSWORD = "12";
 
 
     SimpleDateFormat formatter = new SimpleDateFormat("MMddHHmm");
@@ -72,9 +70,9 @@ public class LoginNegative extends TestBase {
     }
 
     @Test(priority = 7)
-    public void loginWithFalseEmail() {
+    public void loginToRestaurantsPage() {
         new LoginPage(driver)
-                .loginToRestaurants(NONEXISTENT_EMAIL, PASSWORD);
+                .loginToRestaurants(EMAIL, INCORRECT_PASSWORD);
     }
 
     @Test(priority = 8)
@@ -86,31 +84,7 @@ public class LoginNegative extends TestBase {
     @Test(priority = 9)
     public void checkErrorMessage(){
         Assert.assertTrue(new LoginPage(driver)
-        .checkErrorMessage());
-    }
-
-    @Test(priority = 10)
-    public void clearInputs() {
-        new LoginPage(driver)
-                .clearInputs();
-    }
-
-    @Test(priority = 11)
-    public void openLogINPage() {
-        new HomePage(driver)
-                .clickLoginButton(2);
-    }
-
-    @Test(priority = 12)
-    public void loginWithIncorrectPassword() {
-        new LoginPage(driver)
-                .loginToRestaurants(EMAIL, INCORRECT_PASSWORD);
-    }
-
-    @Test(priority = 13)
-    public void checkUserLogInIsSuccessful(){
-        Assert.assertTrue(new HomePage(driver)
-                .checkUsernameText(USERNAME_TEXT));
+                .checkErrorMessage());
     }
 
 }

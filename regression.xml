@@ -1,13 +1,42 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Smoke test" verbose="2">
+<suite name="Regression test" verbose="2" thread-count="1" parallel="tests">
     <parameter name="url" value="https://abh-restaurants-dev-days.herokuapp.com/"/>
     <parameter name="browser" value="chrome"/>
 
-
-    <test name="Login Negative">
+    <test name="Registration Positive">
         <classes>
-            <class name="regression.LoginNegative"/>
+            <class name="regression.registration.RegistrationPositive"/>
+        </classes>
+    </test>
+
+    <test name="Registration with existing email">
+        <classes>
+            <class name="regression.registration.RegistrationNegativeEmail"/>
+        </classes>
+    </test>
+
+    <test name="Registration with non-numeric phone number">
+        <classes>
+            <class name="regression.registration.RegistrationNegativePhoneNumber"/>
+        </classes>
+    </test>
+
+    <test name="Login Positive">
+        <classes>
+            <class name="regression.login.LoginPositive"/>
+        </classes>
+    </test>
+
+    <test name="Login with invalid email">
+        <classes>
+            <class name="regression.login.LoginNegativeEmail"/>
+        </classes>
+    </test>
+
+    <test name="Login with incorrect password">
+        <classes>
+            <class name="regression.login.LoginNegativePassword"/>
         </classes>
     </test>
 
